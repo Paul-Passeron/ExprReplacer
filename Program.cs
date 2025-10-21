@@ -207,8 +207,11 @@ class ExprReplacer
             OperatorSign.Plus
         );
         var optimized = Optimize(example);
+
+        Console.WriteLine("Expression: x + 2 * y + cos(x + 2 * y)\n");
+
         Console.WriteLine("==========================");
-        Console.WriteLine("Example:");
+        Console.WriteLine("Unoptimized:");
         Console.WriteLine("==========================");
         PrintAsRTL(example);
         Console.WriteLine("\n==========================");
