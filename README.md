@@ -1,6 +1,6 @@
 # Expression Replacer
 
-## Small proof-of-concept expression replacer written in C#.
+## Small proof-of-concept expression optimizer written in C#.
 
 This expression replacer assumes that no side-effects are possible, meaning we can replace any expression with their value.
 
