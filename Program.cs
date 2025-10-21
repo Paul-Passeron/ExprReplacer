@@ -32,7 +32,7 @@ class ExprReplacer
     {
         // If they are the same instance then we are done
         if (ReferenceEquals(a, b)) return true;
-        var res = a switch
+        return a switch
         {
             IConstantExpression c => b is IConstantExpression c2 && c.Value == c2.Value,
             IVariableExpression v => b is IVariableExpression v2 && v.Name == v2.Name,
@@ -49,9 +49,7 @@ class ExprReplacer
             IFunction f => b is IFunction f2 && f.Kind == f2.Kind && ExprEq(f.Argument, f2.Argument),
             _ => false
         };
-        Console.Write("Eq: ");
-        Console.WriteLine(res);
-        return res;
+
     }
 
     static IExpression OptimizeBinOp(IBinaryExpression bin, HashSet<IExpression> set)
@@ -64,12 +62,6 @@ class ExprReplacer
 
     static IExpression OptAux(IExpression expression, HashSet<IExpression> set)
     {
-        Console.WriteLine("OptAux:");
-        Console.Write("    expr:");
-        Console.WriteLine(expression);
-        Console.Write("    set: [");
-        Console.Write(string.Join(", ", set.Select(x => x.ToString())));
-        Console.WriteLine("]");
         IExpression? present = null;
 
         foreach (var e in set)
@@ -109,10 +101,6 @@ class ExprReplacer
 
     static void Main()
     {
-        Console.WriteLine("Hello, World !");
-
-        // x + 2 * y + cos(x + 2 * y)
-
         var lhs = new BinaryOp(
             new Variable("x"),
             new BinaryOp(
