@@ -19,7 +19,7 @@ public static class Optimizer
 
         foreach (var e in set)
         {
-            if (ExprEquality.ExprEq(e, expression))
+            if (ExprEquality.Equals(e, expression))
             {
                 present = e;
                 break;

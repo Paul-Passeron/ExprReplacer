@@ -9,11 +9,11 @@ This expression replacer assumes that no side-effects are possible, meaning we c
 - You need the ```dotnet-sdk``` to be able to run C# code.
 - To run the code, simply run the following command in your shell while being in the project directory
 ```
-dotnet run
+dotnet run --project ExprReplacer
 ```
 
 ### On Windows
-- Using Visual Studio, open ```ExprReplacer.csproj``` and run the program inside the IDE.
+- Using Visual Studio, open ```ExprReplacer.sln``` and run the program inside the IDE.
 
 ## Expected Output:
 ```

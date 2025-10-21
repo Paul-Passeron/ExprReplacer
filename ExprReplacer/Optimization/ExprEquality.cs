@@ -5,7 +5,7 @@ using ExprReplacer.Expressions;
 public static class ExprEquality
 {
 
-    public static bool ExprEq(IExpression a, IExpression b)
+    public static bool Equals(IExpression a, IExpression b)
     {
         // If they are the same instance then we are done
         if (ReferenceEquals(a, b)) return true;
@@ -18,12 +18,12 @@ public static class ExprEquality
                 b is IBinaryExpression bin2 &&
                 bin.Sign == bin2.Sign &&
                 (
-                    (ExprEq(bin.Left, bin2.Left) &&
-                        ExprEq(bin.Right, bin2.Right))
-                || ExprEq(bin.Right, bin2.Left) &&
-                        ExprEq(bin.Left, bin2.Right)),
+                    (Equals(bin.Left, bin2.Left) &&
+                        Equals(bin.Right, bin2.Right))
+                || Equals(bin.Right, bin2.Left) &&
+                        Equals(bin.Left, bin2.Right)),
             // We can replace the function calls because we assume they have no side-effects
-            IFunction f => b is IFunction f2 && f.Kind == f2.Kind && ExprEq(f.Argument, f2.Argument),
+            IFunction f => b is IFunction f2 && f.Kind == f2.Kind && Equals(f.Argument, f2.Argument),
             _ => false
         };
 
