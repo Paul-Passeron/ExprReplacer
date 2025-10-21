@@ -48,3 +48,31 @@ expr_6: cos(expr_1)
 expr_0: expr_1 + expr_6
 result: expr_0
 ```
+
+## TODO
+- [ ] Add support for constant folding expressions
+    ```
+    x + 2 * 7 + cos(x + 10 + 4) should output:
+    expr_0: x
+    expr_1: 14
+    expr_2: expr_0 + expr_1
+    expr_3: cos(expr_2)
+    expr_4: expr_2 + expr_3
+    result: expr_4
+    ```
+
+    For the moment, here is what it outputs:
+    ```
+    expr_2: x
+    expr_4: 2
+    expr_5: 7
+    expr_3: expr_4 * expr_5
+    expr_1: expr_2 + expr_3
+    expr_9: 10
+    expr_10: 4
+    expr_8: expr_9 + expr_10
+    expr_7: expr_2 + expr_8
+    expr_6: cos(expr_7)
+    expr_0: expr_1 + expr_6
+    result: expr_0
+    ```
