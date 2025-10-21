@@ -10,7 +10,7 @@ class Program
             new Variable("x"),
             new BinaryOp(
                 new Constant(2),
-                new Variable("y"),
+                new Constant(7),
                 OperatorSign.Multiply
             ),
             OperatorSign.Plus
@@ -19,9 +19,9 @@ class Program
         var rhs = new Function(FunctionKind.Cos, new BinaryOp(
             new Variable("x"),
             new BinaryOp(
-                new Constant(2),
-                new Variable("y"),
-                OperatorSign.Multiply
+                new Constant(4),
+                new Constant(10),
+                OperatorSign.Plus
             ),
             OperatorSign.Plus
         ));
@@ -31,17 +31,22 @@ class Program
             rhs,
             OperatorSign.Plus
         );
-        var optimized = Optimizer.Optimize(example);
+        var optimized_non_folded = Optimizer.Optimize(example, false);
+        var optimized_folded = Optimizer.Optimize(example, true);
 
-        Console.WriteLine("Expression: x + 2 * y + cos(x + 2 * y)\n");
+        Console.WriteLine("Expression: x + 2 * 7 + cos(x + 4 + 10)\n");
 
         Console.WriteLine("==========================");
         Console.WriteLine("Unoptimized:");
         Console.WriteLine("==========================");
         ExprPrinter.PrintAsRTL(example);
         Console.WriteLine("\n==========================");
-        Console.WriteLine("Optimized:");
+        Console.WriteLine("Optimized (Not Folded):");
         Console.WriteLine("==========================");
-        ExprPrinter.PrintAsRTL(optimized);
+        ExprPrinter.PrintAsRTL(optimized_non_folded);
+        Console.WriteLine("\n==========================");
+        Console.WriteLine("Optimized (Folded):");
+        Console.WriteLine("==========================");
+        ExprPrinter.PrintAsRTL(optimized_folded);
     }
 }

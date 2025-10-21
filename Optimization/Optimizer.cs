@@ -46,9 +46,41 @@ public static class Optimizer
         return expr;
     }
 
-    public static IExpression Optimize(IExpression expression)
+    static IExpression FoldBinOp(IBinaryExpression bin)
     {
-        return OptAux(expression, new HashSet<IExpression>());
+        var folded_l = Fold(bin.Left);
+        var folded_r = Fold(bin.Right);
+        if (folded_l is IConstantExpression lhs && folded_r is IConstantExpression rhs)
+        {
+            return bin.Sign switch
+            {
+                OperatorSign.Plus => new Constant(lhs.Value + rhs.Value),
+                OperatorSign.Minus => new Constant(lhs.Value - rhs.Value),
+                OperatorSign.Multiply => new Constant(lhs.Value * rhs.Value),
+                OperatorSign.Divide => new Constant(lhs.Value / rhs.Value),
+                _ => bin, // Unreachable
+            }
+        ;
+        }
+
+        return new BinaryOp(folded_l, folded_r, bin.Sign);
+    }
+
+    public static IExpression Fold(IExpression expression)
+    {
+        return expression switch
+        {
+            IConstantExpression c => c,
+            IBinaryExpression bin => FoldBinOp(bin),
+            IFunction fun => new Function(fun.Kind, Fold(fun.Argument)),
+            _ => expression
+        };
+    }
+
+    public static IExpression Optimize(IExpression expression, bool fold)
+    {
+        var start = fold ? Fold(expression) : expression;
+        return OptAux(start, new HashSet<IExpression>());
     }
 
 

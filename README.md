@@ -50,7 +50,7 @@ result: expr_0
 ```
 
 ## TODO
-- [ ] Add support for constant folding expressions
+- [x] Add support for constant folding expressions
     ```
     x + 2 * 7 + cos(x + 10 + 4) should output:
     expr_0: x
