@@ -74,19 +74,3 @@ result: expr_0
     expr_4: expr_2 + expr_3
     result: expr_4
     ```
-
-    For the moment, here is what it outputs:
-    ```
-    expr_2: x
-    expr_4: 2
-    expr_5: 7
-    expr_3: expr_4 * expr_5
-    expr_1: expr_2 + expr_3
-    expr_9: 10
-    expr_10: 4
-    expr_8: expr_9 + expr_10
-    expr_7: expr_2 + expr_8
-    expr_6: cos(expr_7)
-    expr_0: expr_1 + expr_6
-    result: expr_0
-    ```
